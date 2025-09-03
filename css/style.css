@@ -1,0 +1,220 @@
+/* --- 第二阶段：视觉设计与高级样式 --- */
+
+/* 1. CSS变量：定义全局设计风格 */
+:root {
+    --primary-color: #e88484; /* 温柔的珊瑚粉 */
+    --secondary-color: #f8c2c2; /* 柔和的淡粉 */
+    --background-color: #fdf6f6; /* 温馨的米白背景 */
+    --text-color: #5c5c5c; /* 深灰色文字 */
+    --light-text-color: #ffffff; /* 亮色文字 */
+    --heading-font: 'Noto Serif SC', serif; /* 标题字体：思源宋体 */
+    --body-font: 'Poppins', sans-serif; /* 内容字体 */
+    --border-radius: 12px;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* 2. 基础与重置样式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.7;
+}
+
+/* 3. 顶部英雄区域设计 */
+.hero-section {
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, rgba(248, 194, 194, 0.8), rgba(232, 132, 132, 0.8)), url('https://placehold.co/1920x1080/f8c2c2/fdf6f6?text=Our+Memory') no-repeat center center/cover;
+    color: var(--light-text-color);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.main-title {
+    font-family: var(--heading-font);
+    font-size: clamp(2.5rem, 8vw, 4.5rem); /* 响应式字体大小 */
+    font-weight: 700;
+}
+
+.love-counter {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+#day-counter {
+    font-weight: 700;
+    font-size: 1.2em;
+    margin: 0 0.5rem;
+}
+
+/* 4. 时间轴区域与标题 */
+.timeline-section {
+    padding: 80px 20px;
+}
+
+.section-title {
+    font-family: var(--heading-font);
+    font-size: 2.5em;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+/* 5. 核心：时间轴设计 */
+#timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 时间轴的中心线 */
+#timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background-color: var(--secondary-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+    border-radius: 3px;
+}
+
+/* 时间轴上的事件卡片 */
+.timeline-event {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.timeline-event.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.event-content {
+    padding: 25px;
+    background-color: white;
+    position: relative;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* 鼠标悬浮在卡片上时的效果 */
+.event-content:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+}
+
+.timeline-event img {
+    width: 100%;
+    height: 200px; /* 固定图片高度 */
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    object-fit: cover; /* 保证图片不变形 */
+    background-color: #f0f0f0; /* 图片加载时的占位背景色 */
+}
+
+.event-details {
+    padding: 20px;
+}
+
+.event-date {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+}
+
+.event-description {
+    font-size: 1em;
+}
+
+.timeline-event.left { left: 0; }
+.timeline-event.right { left: 50%; }
+
+.timeline-event.left .event-content::after,
+.timeline-event.right .event-content::after {
+    content: " ";
+    position: absolute;
+    top: 28px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+}
+.timeline-event.left .event-content::after {
+    right: -20px;
+    border-left-color: white;
+}
+.timeline-event.right .event-content::after {
+    left: -20px;
+    border-right-color: white;
+}
+
+.timeline-event::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    background-color: var(--background-color);
+    border: 4px solid var(--primary-color);
+    top: 30px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-event.left::after { right: -11.5px; }
+.timeline-event.right::after { left: -8.5px; }
+
+/* 6. 新增：结尾部分样式 */
+.footer-section {
+    text-align: center;
+    padding: 20px 20px 80px; /* 调整了上边距，使其离时间轴不那么远 */
+}
+
+.ending-text {
+    font-family: var(--heading-font); /* 使用标题同款艺术字体 */
+    font-size: 2em;
+    color: var(--secondary-color); /* 使用柔和的淡粉色 */
+    font-weight: 400;
+    letter-spacing: 3px; /* 增加文字间距 */
+}
+
+
+/* 7. 响应式设计 */
+@media screen and (max-width: 768px) {
+    #timeline-container::after { left: 20px; }
+    .timeline-event {
+        width: 100%;
+        padding-left: 55px;
+        padding-right: 15px;
+    }
+    .timeline-event.left,
+    .timeline-event.right { left: 0%; }
+    .timeline-event::after { left: 10.5px; }
+    .timeline-event.left .event-content::after,
+    .timeline-event.right .event-content::after {
+        left: -20px;
+        border-right-color: white;
+        border-left-color: transparent;
+    }
+}
+
