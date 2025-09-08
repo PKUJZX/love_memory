@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { date: '2025-08-14', description: '没看到天坛亮灯但吃到春饼', imageUrl: 'images/0814.jpg' },
         { date: '2025-08-19', description: '去承德旅游啦', imageUrl: 'images/0819.jpg' },
         { date: '2025-08-24', description: '玩剧本杀《红豆》', imageUrl: 'images/0824.jpg' },
-        { date: '2025-08-29', description: '第一次一起过七夕', imageUrl: 'images/0829.jpg' }
+        { date: '2025-08-29', description: '第一次一起过七夕', imageUrl: 'images/0829.jpg' },
+        { date: '2025-09-06', description: '于酒店微醺', imageUrl: 'images/0906.jpg' }
     ];
 
     // --- 3. DOM元素获取 ---
@@ -92,3 +93,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init(); // 启动！
 });
+
